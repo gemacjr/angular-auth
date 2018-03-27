@@ -6,18 +6,20 @@ import { User } from '../models/user';
 @Injectable()
 export class AuthService {
 
-  private BASE_URL: string = 'http:/openam';
-  private username;
-  private password;
-  private headers: Headers = new Headers({
-    'X-Open-Username': this.username,
-    'X-Open-Password': this.password
-  });
+  private BASE_URL: string = 'http://localhost:8080/openam/json/realms/ofipublic/authenticate';
+  
 
   constructor(private http: Http){}
 
   login(user: User): Promise<any> {
-    return this.http.post(this.BASE_URL, user, {headers: this.headers }).toPromise();
+    const username = user.username
+    const password = user.password
+    const header: Headers = new Headers({
+      
+      'X-OpenAM-Username': username,
+      'X-OpenAM-Password': password
+    })
+    return this.http.post(this.BASE_URL, {headers: header }).toPromise();
   }
 
   ensureAuthenticated(token): Promise<any> {
