@@ -6,7 +6,8 @@ import { User } from '../models/user';
 @Injectable()
 export class AuthService {
 
-  private BASE_URL: string = 'http://localhost:8080/openam/json/realms/ofipublic/authenticate';
+  //private BASE_URL: string = 'http://localhost:8080/openam/json/realms/ofipublic/authenticate';
+  private BASE_URL: string = 'http://authamdev.ofi.com:80/openam/json/realms/ofipublic/authenticate';
   
 
   constructor(private http: Http){}
